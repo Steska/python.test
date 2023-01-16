@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS mainmenu(
+ id INTEGER PRIMARY KEY autoincrement,
+ title VARCHAR(255) NOT NULL,
+ url VARCHAR(255) NOT NULL
+)
