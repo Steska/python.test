@@ -1,9 +1,7 @@
 from flask import Flask, jsonify, request
 import connect
-from repositories.DictionaryRepository import DictionaryRepository
-from Entity.Dictionary import Dictionary
+from models.Dictionary import Dictionary
 from application import app
-import json
 
 
 @app.route("/")
@@ -14,8 +12,8 @@ def index():
 
 @app.route("/dictionaries", methods=['GET'])
 def getDictionaries():
-    repository = DictionaryRepository(Dictionary, )
-    dictionaries = repository.getAll()
+
+    dictionaries = Dictionary().getAll()
     result = []
     for dictionary in dictionaries:
         dd = dict()
@@ -27,8 +25,7 @@ def getDictionaries():
 
 @app.route("/dictionaries/<id>", methods=['GET'])
 def getDictioneryById(id):
-    repository = DictionaryRepository(Dictionary)
-    dictionary = repository.getOneById(id)
+    dictionary = Dictionary().getOneById(id)
     dd = dict()
     dd['id'] = dictionary.id
     dd['title'] = dictionary.title
@@ -39,9 +36,8 @@ def getDictioneryById(id):
 def addDictionary():
     if request.method == 'POST':
         data = request.get_json()
-        repository = DictionaryRepository(Dictionary)
-        repository.AddDictionary(data)
-    return 1
+        Dictionary().AddDictionary(data)
+    return ''
 
 
 if __name__ == 'main':
